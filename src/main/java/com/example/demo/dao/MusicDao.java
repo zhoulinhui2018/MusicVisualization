@@ -3,6 +3,8 @@ package com.example.demo.dao;
 import com.example.demo.entity.Music;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
  * @since 2020-04-12 20:55:11
  */
 @Mapper
+@Repository
 public interface MusicDao {
 
     /**

@@ -1,11 +1,9 @@
-package com.example.demo.musicController;
+package com.example.demo.controller;
 
 import com.example.demo.entity.Music;
 import com.example.demo.service.MusicService;
-import com.example.demo.service.impl.MusicServiceImpl;
 import javazoom.jl.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,7 +47,7 @@ public class MusicController {
         filename=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+"_"+filename;
         System.out.println("上传文件名为："+filename);
 
-        String path="E:/Java/UploadFiles"+filename;
+        String path="E:/Java/UploadFiles/"+filename;
         System.out.println("文件保存绝对路径"+path);
 
         File destfile=new File(path);
@@ -61,17 +59,18 @@ public class MusicController {
             destfile.getParentFile().mkdir();
         }
 
-        String url="https://localhost:8080/music/"+path;
+        String url="http://localhost:8080/music/"+filename;
         try {
             multipartFile.transferTo(destfile);
             Music music=new Music();
             music.setName(destfile.getName());
             music.setUrl(url);
+            music.setId(1);
             musicService.insert(music);
         } catch (IOException e) {
             return "上传失败";
         }
-        return "上传成功,文件url: "+url;
+        return "上传成功,文件url:  "+url;
     }
 
     @ResponseBody

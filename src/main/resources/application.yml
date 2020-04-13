@@ -4,6 +4,23 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/MusicBack?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/musicBank?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 123456
+
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+
+mybatis:
+  #domain对象的包
+  type-aliases-package: com.example.demo.entity
+  #xmu.oomall.footprint.mapper。xml所在的位置
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #自动将SQL中查出来的带下划线的字段，转换为驼峰标志，再去匹配类中的属性
+    map-underscore-to-camel-case: true
+
+zhou:
+  musicPath : file:E:/Java/UploadFiles/

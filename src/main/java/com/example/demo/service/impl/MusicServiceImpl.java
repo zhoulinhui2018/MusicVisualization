@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Music;
 import com.example.demo.dao.MusicDao;
 import com.example.demo.service.MusicService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Service("musicService")
 public class MusicServiceImpl implements MusicService {
-    @Resource
+    @Autowired
     private MusicDao musicDao;
 
     /**
