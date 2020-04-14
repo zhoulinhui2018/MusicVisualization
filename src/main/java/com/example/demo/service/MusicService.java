@@ -51,5 +51,14 @@ public interface MusicService {
      * @return 是否成功
      */
     boolean deleteById(Integer id);
+    
+    /** 
+    * @Description: 查询所有结果并分页 
+    * @Param: [page, limit] 
+    * @return: java.util.List<com.example.demo.entity.Music> 
+    * @Author: Zhou Linhui
+    * @Date: 2020/4/13 
+    */ 
+    List<Music> queryAll(int page,int limit);
 
 }

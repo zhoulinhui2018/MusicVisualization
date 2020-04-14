@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Music;
 import com.example.demo.dao.MusicDao;
 import com.example.demo.service.MusicService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,12 @@ import java.util.List;
 public class MusicServiceImpl implements MusicService {
     @Autowired
     private MusicDao musicDao;
+
+    @Override
+    public List<Music> queryAll(int page, int limit) {
+        PageHelper.startPage(page,limit);
+        return musicDao.queryAll(new Music());
+    }
 
     /**
      * 通过ID查询单条数据
