@@ -2,20 +2,20 @@ server:
   port: 8080
 
 #本地数据库配置
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/musicBank?useUnicode=true&characterEncoding=UTF-8
-#    username: root
-#    password: 123456
-
-#服务器数据库配置
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://62.234.154.66:3306/musicbank
+    url: jdbc:mysql://localhost:3306/musicBank?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
+
+#服务器数据库配置
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://62.234.154.66:3306/musicbank
+#    username: root
+#    password: 123456
 
 
   servlet:
