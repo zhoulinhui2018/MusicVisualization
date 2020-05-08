@@ -102,6 +102,7 @@ public class UserController {
         model.addAttribute("msg","hello shiro");
         return "index";
     }
+
     @RequestMapping("/user/add")
     public String add(){
         return "user/add";

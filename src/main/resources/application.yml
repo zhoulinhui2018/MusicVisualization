@@ -33,6 +33,6 @@ mybatis:
     map-underscore-to-camel-case: true
 
 zhou:
-  musicPath : /root/UploadFiles/
+  musicPath : E:/Java/UploadFiles/
 #服务器上的保存路径： /root/UploadFiles/
 #本地保存路径 E:/Java/UploadFiles/

@@ -79,7 +79,7 @@ public class MusicController {
             destfile.getParentFile().mkdir();
         }
 
-        String url = "http://62.234.154.66:8080/music/" + filename;
+        String url = "http://localhost:8080/music/" + filename;
         try {
             multipartFile.transferTo(destfile);
             Music music = new Music();
