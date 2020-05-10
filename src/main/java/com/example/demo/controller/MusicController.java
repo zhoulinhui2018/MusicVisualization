@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-@Api("音乐相关接口")
+@Api(tags = "音乐相关接口")
 @RestController
 @RequestMapping("music")
 public class MusicController {
@@ -62,7 +62,6 @@ public class MusicController {
      * @Author: Zhou Linhui
      * @Date: 2020/4/13
      */
-    @ResponseStatus
     @ResponseBody
     @ApiOperation("上传音乐")
     @PostMapping("upload")
@@ -100,7 +99,8 @@ public class MusicController {
         } catch (IOException e) {
             return "上传失败";
         }
-        return "上传成功,文件url:  " + url;
+//        return "上传成功,文件url:  " + url;
+        return  "上传成功";
     }
 
     /**

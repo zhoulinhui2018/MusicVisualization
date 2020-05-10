@@ -26,7 +26,7 @@ import javax.annotation.Resource;
  * @since 2020-05-06 16:36:39
  */
 
-@Api("用户相关接口")
+@Api(tags = "用户相关接口")
 @RestController
 public class UserController {
 
@@ -79,7 +79,6 @@ public class UserController {
      */
     @ApiOperation("用户注册")
     @ResponseBody
-    @ResponseStatus
     @PostMapping("/user/signup")
     public String signUp(@RequestParam("userName")
                              @ApiParam("用户名")
