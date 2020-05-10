@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author: lijincan
  * @date: 2020年02月26日 13:19
- * @Description: TODO
+ * @Description:
  */
 public class UserRealm extends AuthorizingRealm {
 

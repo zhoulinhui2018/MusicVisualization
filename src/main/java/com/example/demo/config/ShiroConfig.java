@@ -6,6 +6,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -41,11 +42,12 @@ public class ShiroConfig {
         filterMap.put("/user/login","anon");
         filterMap.put("/user/add", "authc");
         filterMap.put("/user/update", "authc");
+        filterMap.put("/music/*","authc");
         //设置登出
         filterMap.put("/logout", "logout");
         bean.setFilterChainDefinitionMap(filterMap);
         //设置登录请求
-        bean.setLoginUrl("/toLogin");
+        bean.setLoginUrl("/user/unlogin");
         //设置未授权页面
         bean.setUnauthorizedUrl("/noauth");
         return bean;
