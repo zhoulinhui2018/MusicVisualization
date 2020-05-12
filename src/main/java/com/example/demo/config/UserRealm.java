@@ -37,7 +37,7 @@ public class UserRealm extends AuthorizingRealm {
         //获取当前登录的对象
         Subject subject = SecurityUtils.getSubject();
         User currentUser = (User) subject.getPrincipal();
-        System.out.println(currentUser.getName()+"   test");
+        System.out.println(currentUser.getUserName()+"   test");
         info.addStringPermission("authc");
         return info;
     }

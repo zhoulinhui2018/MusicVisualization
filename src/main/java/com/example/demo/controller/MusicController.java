@@ -3,24 +3,19 @@ package com.example.demo.controller;
 import com.example.demo.entity.Music;
 import com.example.demo.entity.User;
 import com.example.demo.service.MusicService;
-import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javazoom.jl.player.Player;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -76,7 +71,7 @@ public class MusicController {
 //        filename = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + filename;
         System.out.println("上传文件名为：" + filename);
         User loginUser = (User) SecurityUtils.getSubject().getPrincipal();
-        String path = absolutePath + loginUser.getName() + "/" + filename;
+        String path = absolutePath + loginUser.getUserName() + "/" + filename;
         System.out.println("文件保存绝对路径" + path);
 
         File destfile = new File(path);
@@ -97,10 +92,10 @@ public class MusicController {
             music.setId(1);
             musicService.insert(music);
         } catch (IOException e) {
-            return "上传失败";
+            return "failure";
         }
 //        return "上传成功,文件url:  " + url;
-        return  "上传成功";
+        return  "success";
     }
 
     /**

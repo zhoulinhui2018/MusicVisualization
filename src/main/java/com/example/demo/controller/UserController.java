@@ -37,7 +37,7 @@ public class UserController {
     @ApiOperation("用户未登录，这是当用户未登录时请求其他接口会被拦截并调用此接口")
     @GetMapping("/user/unlogin")
     public String unlogin() {
-        return "用户未登录";
+        return "user not logged in";
     }
 
     /**
@@ -50,23 +50,20 @@ public class UserController {
     @ApiOperation("用户登录")
     @ResponseBody
     @PostMapping("/user/login")
-    public String login(@RequestParam("userName")
-                        @ApiParam("用户名")
-                                String userName,
-                        @RequestParam("password")
-                        @ApiParam("密码")
-                                String password) {
+    public String login(@RequestBody
+                            @ApiParam("用户信息")
+                                    User user) {
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
         try {
             subject.login(token);
-            return "登录成功";
+            return "success";
         } catch (UnknownAccountException e) {//用户名不存在
 //            model.addAttribute("msg","用户名错误");
-            return "用户名不存在";
+            return "user name does not exist";
         } catch (IncorrectCredentialsException e) {
 //            model.addAttribute("msg","密码错误");
-            return "密码错误";
+            return "password error";
         }
     }
 
@@ -80,27 +77,24 @@ public class UserController {
     @ApiOperation("用户注册")
     @ResponseBody
     @PostMapping("/user/signup")
-    public String signUp(@RequestParam("userName")
-                             @ApiParam("用户名")
-                                     String userName,
-                         @RequestParam("password")
-                             @ApiParam("密码")
-                                     String password) {
-        if ("".equals(userName)) {
+    public String signUp(@RequestBody
+                             @ApiParam("用户信息")
+                                     User user) {
+        if ("".equals(user.getUserName())) {
             return "用户名不能为空";
-        } else if ("".equals(password)) {
+        } else if ("".equals(user.getPassword())) {
             return "密码不能为空";
         }
 
-        User user = userService.queryUserByName(userName);
-        if (user != null) {
-            return "用户名已存在";
+        User oriUser = userService.queryUserByName(user.getUserName());
+        if (oriUser != null) {
+            return "user name already exists";
         }
         try {
-            userService.insert(new User(1, userName, password));
-            return "注册成功";
+            userService.insert(user);
+            return "success";
         } catch (Exception e) {
-            return "注册失败";
+            return "failure";
         }
     }
 

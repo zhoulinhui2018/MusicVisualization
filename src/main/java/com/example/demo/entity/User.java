@@ -18,14 +18,14 @@ public class User implements Serializable {
     private Integer id;
 
     @ApiModelProperty("用户名")
-    private String name;
+    private String userName;
 
     @ApiModelProperty("密码")
     private String password;
 
-    public User(Integer id, String name, String password) {
+    public User(Integer id, String userName, String password) {
         this.id = id;
-        this.name = name;
+        this.userName = userName;
         this.password = password;
     }
 
@@ -37,12 +37,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
