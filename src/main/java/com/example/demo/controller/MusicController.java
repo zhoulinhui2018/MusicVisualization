@@ -10,6 +10,7 @@ import javazoom.jl.player.Player;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,8 +22,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Api(tags = "音乐相关接口")
-@RestController
+@Controller
 @RequestMapping("music")
+//用来解决跨域请求
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class MusicController {
 
     @Autowired

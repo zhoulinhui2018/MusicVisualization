@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class SwaggerConfig {
                 .groupName("周林辉")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.demo.controller"))
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+                .apis(RequestHandlerSelectors.withClassAnnotation(Controller.class))
 //                扫描指定方法
 //                .apis(RequestHandlerSelectors.withMethodAnnotation(GetMapping.class))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
