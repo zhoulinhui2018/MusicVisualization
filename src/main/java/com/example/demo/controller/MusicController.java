@@ -62,7 +62,7 @@ public class MusicController {
      */
     @ResponseBody
     @ApiOperation("上传音乐")
-    @PostMapping("upload")
+    @PostMapping("/upload")
     public String uploadMusic(@RequestParam("file")
                               @ApiParam("文件")
                                       MultipartFile multipartFile) throws IOException {

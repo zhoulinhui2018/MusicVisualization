@@ -107,10 +107,12 @@ public class UserController {
      * @Date: 2020/5/6
      */
     @ApiOperation("用户注销")
+    @ResponseBody
     @PostMapping("/user/logout")
-    public void logout() {
+    public String logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
+        return "success";
     }
 
     @RequestMapping("/toSignup")
