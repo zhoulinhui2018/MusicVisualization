@@ -25,7 +25,7 @@ import java.util.TreeMap;
 @Controller
 @RequestMapping("music")
 //用来解决跨域请求
-@CrossOrigin(origins = "*",maxAge = 3600)
+@CrossOrigin(origins = "http://62.234.154.66:3000",maxAge = 3600,allowCredentials = "true")
 public class MusicController {
 
     @Autowired

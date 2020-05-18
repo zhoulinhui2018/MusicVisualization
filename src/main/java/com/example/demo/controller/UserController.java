@@ -13,11 +13,13 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.File;
 
 /**
  * (User)表控制层
@@ -28,11 +30,14 @@ import javax.annotation.Resource;
 
 @Api(tags = "用户相关接口")
 @Controller
-@CrossOrigin(origins = "*",maxAge = 3600)
+@CrossOrigin(origins = "http://62.234.154.66:3000",maxAge = 3600,allowCredentials = "true")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${zhou.musicPath}")
+    private String absolutePath;
 
     @ResponseBody
     @ApiOperation("用户未登录，这是当用户未登录时请求其他接口会被拦截并调用此接口")
@@ -68,6 +73,20 @@ public class UserController {
         }
     }
 
+    @ApiOperation("调取此接口获得当前登录用户的用户名")
+    @ResponseBody
+    @GetMapping("/user/name")
+    public String getUserName(){
+
+        Subject subject= SecurityUtils.getSubject();
+        User currentUser = (User) subject.getPrincipal();
+        if (currentUser!=null){
+            return currentUser.getUserName();
+        }else {
+            return "user not logged in";
+        }
+    }
+
     /**
      * @Description: 用户注册
      * @Param: [userName, password]
@@ -92,8 +111,14 @@ public class UserController {
             return "user name already exists";
         }
         try {
-            userService.insert(user);
-            return "success";
+            synchronized (this) {
+                userService.insert(user);
+                File musicDirectory = new File(absolutePath + "/" + user.getUserName());
+                if (!musicDirectory.exists()) {
+                    musicDirectory.mkdir();
+                }
+                return "success";
+            }
         } catch (Exception e) {
             return "failure";
         }
