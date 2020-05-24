@@ -163,10 +163,11 @@ public class UserController {
     }
 
     @RequestMapping("/toLogin")
-    public String tologin() {
+    public String toLogin() {
         return "login";
     }
 
+    @ResponseBody
     @RequestMapping("/noauth")
     public String unauthorized() {
         return "未授权";
