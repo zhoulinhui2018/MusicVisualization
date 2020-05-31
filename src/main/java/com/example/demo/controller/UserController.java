@@ -5,9 +5,7 @@ import com.example.demo.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.el.parser.Token;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.io.File;
 
 /**
@@ -30,7 +27,8 @@ import java.io.File;
 
 @Api(tags = "用户相关接口")
 @Controller
-@CrossOrigin(origins = "http://62.234.154.66:3000",maxAge = 3600,allowCredentials = "true")
+//62.234.154.66
+@CrossOrigin(origins = "http://62.234.154.66:3000", maxAge = 3600, allowCredentials = "true")
 public class UserController {
 
     @Autowired
@@ -57,18 +55,18 @@ public class UserController {
     @ResponseBody
     @PostMapping("/user/login")
     public String login(@RequestBody
-                            @ApiParam("用户信息")
-                                    User user) {
+                        @ApiParam("用户信息")
+                                User user) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
         try {
             subject.login(token);
             return "success";
         } catch (UnknownAccountException e) {//用户名不存在
-//            model.addAttribute("msg","用户名错误");
+            //      model.addAttribute("msg","用户名错误");
             return "user name does not exist";
         } catch (IncorrectCredentialsException e) {
-//            model.addAttribute("msg","密码错误");
+            //      model.addAttribute("msg","密码错误");
             return "password error";
         }
     }
@@ -76,13 +74,13 @@ public class UserController {
     @ApiOperation("调取此接口获得当前登录用户的用户名")
     @ResponseBody
     @GetMapping("/user/name")
-    public String getUserName(){
+    public String getUserName() {
 
-        Subject subject= SecurityUtils.getSubject();
+        Subject subject = SecurityUtils.getSubject();
         User currentUser = (User) subject.getPrincipal();
-        if (currentUser!=null){
+        if (currentUser != null) {
             return currentUser.getUserName();
-        }else {
+        } else {
             return "user not logged in";
         }
     }
@@ -98,8 +96,8 @@ public class UserController {
     @ResponseBody
     @PostMapping("/user/signup")
     public String signUp(@RequestBody
-                             @ApiParam("用户信息")
-                                     User user) {
+                         @ApiParam("用户信息")
+                                 User user) {
         if ("".equals(user.getUserName())) {
             return "用户名不能为空";
         } else if ("".equals(user.getPassword())) {

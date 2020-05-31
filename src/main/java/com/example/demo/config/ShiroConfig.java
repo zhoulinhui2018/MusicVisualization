@@ -6,7 +6,6 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -39,10 +38,10 @@ public class ShiroConfig {
         //授权
 //        filterMap.put("/user/add", "authc");
 //        filterMap.put("/user/update", "authc");
-        filterMap.put("/user/login","anon");
+        filterMap.put("/user/login", "anon");
         filterMap.put("/user/add", "authc");
         filterMap.put("/user/update", "authc");
-        filterMap.put("/music/*","authc");
+        filterMap.put("/music/*", "authc");
         //设置登出
         filterMap.put("/logout", "logout");
         bean.setFilterChainDefinitionMap(filterMap);
@@ -70,7 +69,7 @@ public class ShiroConfig {
 
     //整合thymeleaf
     @Bean
-    public ShiroDialect getShiroDialect(){
+    public ShiroDialect getShiroDialect() {
         return new ShiroDialect();
     }
 }
