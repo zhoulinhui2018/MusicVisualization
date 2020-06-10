@@ -26,7 +26,7 @@ import java.util.TreeMap;
 @RequestMapping("music")
 //用来解决跨域请求
 //62.234.154.66
-@CrossOrigin(origins = "http://62.234.154.66:3000",maxAge = 3600,allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000",maxAge = 3600,allowCredentials = "true")
 public class MusicController {
 
     @Autowired
@@ -110,8 +110,9 @@ public class MusicController {
      * @Date: 2020/4/13
      */
     @ResponseBody
+    @ApiOperation("获取音乐Url")
     @ResponseStatus
-    @GetMapping("lists")
+    @GetMapping("/lists")
     public Map<String, String> getMusicNamesList(@RequestParam(defaultValue = "1") int page,
                                                  @RequestParam(defaultValue = "15") int limit) {
 //        PageHelper.startPage(page, limit);不能使用是因为pagehelper底层很有可能也是用到了limit去数据库中查的

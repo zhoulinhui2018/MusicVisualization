@@ -52,20 +52,15 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println("执行了=>认证doGetAuthenticationInfo");
-
         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
-
         //从token中取到用户名再去查用户密码
         User user = userService.queryUserByName(userToken.getUsername());
-
         if (user==null){
             return null;
         }
-
         Subject currentSubject = SecurityUtils.getSubject();
         Session session = currentSubject.getSession();
         session.setAttribute("loginUser",user);
-
         return new SimpleAuthenticationInfo(user,user.getPassword(),"");
     }
 }

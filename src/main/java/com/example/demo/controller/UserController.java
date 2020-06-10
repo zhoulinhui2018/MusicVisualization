@@ -28,7 +28,7 @@ import java.io.File;
 @Api(tags = "用户相关接口")
 @Controller
 //62.234.154.66
-@CrossOrigin(origins = "http://62.234.154.66:3000", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 public class UserController {
 
     @Autowired
